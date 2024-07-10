@@ -1,0 +1,81 @@
+<script src="register-form-reactive.component.ts"></script>
+<div class="container">
+
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <fieldset>
+      <h1>Registration Form - reactive</h1>
+
+      <p class="field field-icon">
+        <label for="username"><span><i class="fas fa-user"></i></span></label>
+        <input type="text" formControlName="username" placeholder="Mark Ulrich" id="username">
+      </p>
+      <p class="error"
+         *ngIf="registrationForm.get('username')?.invalid &&
+     (registrationForm.get('username')?.dirty ||
+      registrationForm.get('username')?.touched)">
+        Full name is invalid.</p>
+
+      <p class="field field-icon">
+        <label for="email"><span><i class="fas fa-envelope"></i></span></label>
+        <input type="text" formControlName="email" placeholder="mark@gmail.com" id="email">
+      </p>
+      <p class="error"
+         *ngIf="registrationForm.get('email')?.invalid &&
+     (registrationForm.get('email')?.dirty ||
+      registrationForm.get('email')?.touched)">
+        Email is invalid.</p>
+
+      <p class="field field-icon">
+        <label for="telephone"><span><i class="fas fa-phone"></i></span></label>
+        <select formControlName="telephone" id="telephone" class="tel" [(ngModel)]="selectedCode">
+          <option *ngFor="let countryCode of countryCodes" [value]="countryCode">{{ countryCode }}</option>
+        </select>
+        <input type="text" formControlName="phone" id="phone" placeholder="888 888">
+      </p>
+      <p class="error"
+         *ngIf="registrationForm.get('phone')?.invalid &&
+     (registrationForm.get('phone')?.dirty ||
+      registrationForm.get('phone')?.touched)">
+        Phone is invalid.</p>
+
+      <p class="field field-icon">
+        <label for="imageUrl"><span><i class="fas fa-image"></i></span></label>
+        <input type="text" formControlName="imageUrl" id="imageUrl" placeholder="http">
+      </p>
+
+      <p class="error" *ngIf="registrationForm.get('imageUrl')?.touched &&
+      registrationForm.controls['imageUrl']?.errors?.['incorrect']">
+        Invalid URL!</p>
+
+      <p class="field field-icon">
+        <label for="profession"><span><i class="fas fa-building"></i></span></label>
+        <select formControlName="profession" id="profession" class="building" [(ngModel)]="selectedProfession">
+          <option *ngFor="let profession of professions" [value]="profession">{{ profession }}</option>
+        </select>
+      </p>
+
+      <div formGroupName="passwordGroup">
+        <p class="field field-icon">
+          <label for="password"><span><i class="fas fa-lock"></i></span></label>
+          <input type="password" id="password" formControlName="password" placeholder="******" autocomplete="off">
+        </p>
+        <p class="error"
+           *ngIf="registrationForm.get('passwordGroup.password')?.invalid &&
+       (registrationForm.get('passwordGroup.password')?.dirty ||
+        registrationForm.get('passwordGroup.password')?.touched)">
+          Password invalid.</p>
+        <p class="field field-icon">
+          <label for="repassword"><span><i class="fas fa-lock"></i></span></label>
+          <input type="password" id="repassword" formControlName="repassword" placeholder="******" autocomplete="off">
+        </p>
+      </div>
+      <p class="error"
+         *ngIf="registrationForm.get('passwordGroup')?.invalid &&
+     (registrationForm.get('passwordGroup.repassword')?.dirty ||
+      registrationForm.get('passwordGroup.repassword')?.touched)">
+        Passwords do not match.</p>
+
+      <button type="submit" [disabled]="registrationForm.invalid">Submit</button>
+    </fieldset>
+  </form>
+</div>

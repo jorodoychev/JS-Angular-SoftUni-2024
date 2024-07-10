@@ -3,7 +3,7 @@
   <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
 
     <fieldset>
-      <h1>Registration Form</h1>
+      <h1>Registration Form - template-driven</h1>
 
       <p class="field field-icon">
         <label for="username"><span><i class="fas fa-user"></i></span></label>
@@ -32,8 +32,13 @@
                pattern="^\d{9}$">
       </p>
 
+      <p class="field field-icon">
+        <label for="imageUrl"><span><i class="fas fa-image"></i></span></label>
+        <input type="text" name="imageUrl" id="imageUrl" appImageUrlValidator placeholder="http" ngModel #imageUrl="ngModel" required>
+      </p>
+
       <!-- if error -->
-      <p class="error" *ngIf="phone.invalid && (phone.dirty || phone.touched)">Phone is invalid</p>
+      <p class="error" *ngIf="registrationForm.controls['imageUrl']?.errors?.['incorrect']">Invalid URL!</p>
       <!-- end if error -->
 
       <p class="field field-icon">

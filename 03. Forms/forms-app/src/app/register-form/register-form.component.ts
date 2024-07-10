@@ -18,7 +18,7 @@ export class RegisterFormComponent {
   onSubmit(form: NgForm) {
     if (form.valid) {
       console.log('Registration successful. Form data:', form.value);
-      // Implement your service logic here
+      form.reset()
     } else {
       console.log('Form is not valid');
     }
