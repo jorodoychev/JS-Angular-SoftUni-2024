@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ImageUrlValidatorDirective} from "../image-url-validator.directive";
 
 @Component({
   selector: 'app-register-form-reactive',
